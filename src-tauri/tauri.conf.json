@@ -61,13 +61,13 @@
     "windows": [
       {
         "fullscreen": false,
-        "title": "Music Tauri",
+        "title": "Bubbly Chat",
         "center": true,
         "resizable": true,
         "decorations": false,
         "transparent": true,
-        "height": 920,
-        "width": 1300
+        "height": 850,
+        "width": 1200
       }
     ]
   }

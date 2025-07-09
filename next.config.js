@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -8,7 +7,8 @@ const nextConfig = {
     domains: ["avatars.githubusercontent.com", "images.unsplash.com"],
   },
   experimental: {
-    // appDir: true,
+    appDir: true,           // ✅ dùng app router
+    serverActions: true,    // ✅ bật server actions
   },
 }
 

@@ -14,6 +14,7 @@
 - [Bundle size optimized](https://github.com/johnthagen/min-sized-rust) [`Cargo.toml`](/src-tauri/Cargo.toml) (.msi 2mb)
 
 ## Getting Started
+### WE USE PNPM FOR ADD THINGS
 
 ```
 gh repo clone agmmnn/tauri-ui-boilerplate
@@ -23,7 +24,7 @@ yarn
 
 ``` bash
 pnpm install 
-pnpm add @clerk/nextjs --shamefully-hoist
+pnpm add @clerk/nextjs --shamefully-hoist 
 npm run tauri dev
 npm run tauri build
 ```

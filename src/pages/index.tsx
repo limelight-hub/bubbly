@@ -127,7 +127,13 @@ function App() {
                       </SignUpButton>
                     </SignedOut>
                     <SignedIn>
-                      <UserButton />
+                      <UserButton
+                        appearance={{
+                          elements: {
+                            userButtonPopoverFooter: "hidden",
+                          },
+                        }}
+                      />
                     </SignedIn>
                   </div>
                 </div>
