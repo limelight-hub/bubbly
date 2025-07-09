@@ -1,246 +1,77 @@
-"use client"
+import { GetServerSideProps } from "next"
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs"
-import { invoke } from "@tauri-apps/api/tauri"
-import {
-  Album,
-  CreditCard,
-  Keyboard,
-  ListMusic,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Podcast,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-} from "lucide-react"
-import { nanoid } from "nanoid"
+import { db } from "@/lib/db"
+import { initialProfile } from "@/lib/initial-profile"
 
-import { listenNowAlbums, madeForYouAlbums, playlists } from "@/lib/data"
-import { cn } from "@/lib/utils"
-import { LeftMenu } from "@/components/left-menu"
-import { Titlebar } from "@/components/titlebar"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
-interface Album {
-  name: string
-  artist: string
-  cover: string
-}
-
-function App() {
-  const [greetMsg, setGreetMsg] = useState("")
-  const [name, setName] = useState("")
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name }))
-  }
-
-  useEffect(() => {
-    // inspect console: Hello, World! You've been greeted from Rust!
-    invoke("greet", { name: "World" }).then(console.log).catch(console.error)
-  })
-
+export default function HomePage() {
   return (
-    <div className="h-screen overflow-hidden border rounded-md border-slate-200 dark:border-slate-800">
-      <Titlebar />
-      <div className="overflow-hidden transition-all bg-white dark:bg-slate-900">
-        <div className="grid grid-cols-4 xl:grid-cols-5">
-          <LeftMenu />
-          <div className="col-span-3 border-l border-l-slate-200 dark:border-l-slate-700 xl:col-span-4">
-            <div className="h-full px-8 py-6">
-              <Tabs defaultValue="music" className="h-full space-y-6">
-                <div className="flex items-center space-between">
-                  <TabsList>
-                    <TabsTrigger value="music" className="relative">
-                      Music
-                    </TabsTrigger>
-                    <TabsTrigger value="podcasts">Podcasts</TabsTrigger>
-                    <TabsTrigger value="live" disabled>
-                      Live
-                    </TabsTrigger>
-                  </TabsList>
-                  <div className="ml-auto mr-4">
-                    <h3 className="text-sm font-semibold">Welcome back</h3>
-                  </div>
-                  <div className="flex items-center justify-end h-16 gap-4 p-4">
-                    <SignedOut>
-                      <SignInButton />
-                      <SignUpButton>
-                        <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-                          Sign Up
-                        </button>
-                      </SignUpButton>
-                    </SignedOut>
-                    <SignedIn>
-                      <UserButton
-                        appearance={{
-                          elements: {
-                            userButtonPopoverFooter: "hidden",
-                          },
-                        }}
-                      />
-                    </SignedIn>
-                  </div>
-                </div>
-                <TabsContent value="music" className="p-0 border-none">
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <h2 className="text-2xl font-semibold tracking-tight">
-                        Listen Now
-                      </h2>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
-                        Top picks for you. Updated daily.
-                      </p>
-                    </div>
-                  </div>
-                  <Separator className="my-4" />
-                  <div className="relative">
-                    <div className="relative flex space-x-4">
-                      {listenNowAlbums.map((album) => (
-                        <AlbumArtwork
-                          key={nanoid()}
-                          album={album}
-                          className="w-[250px]"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mt-6 space-y-1">
-                    <h2 className="text-2xl font-semibold tracking-tight">
-                      Made for You
-                    </h2>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Your personal playlists. Updated daily.
-                    </p>
-                  </div>
-                  <Separator className="my-4" />
-                  <div className="relative">
-                    <ScrollArea>
-                      <div className="flex pb-4 space-x-4">
-                        {madeForYouAlbums.map((album) => (
-                          <AlbumArtwork
-                            key={nanoid()}
-                            album={album}
-                            className="w-[150px]"
-                            aspectRatio={1 / 1}
-                          />
-                        ))}
-                      </div>
-                      <ScrollBar orientation="horizontal" />
-                    </ScrollArea>
-                  </div>
-                </TabsContent>
-                <TabsContent
-                  value="podcasts"
-                  className="h-full flex-col border-none p-0 data-[state=active]:flex"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <h2 className="text-2xl font-semibold tracking-tight">
-                        New Episodes
-                      </h2>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
-                        Your favorite podcasts. Updated daily.
-                      </p>
-                    </div>
-                  </div>
-                  <Separator className="my-4" />
-                  <div className="flex h-[450px] shrink-0 items-center justify-center rounded-md border border-dashed border-slate-200 dark:border-slate-700">
-                    <div className="mx-auto flex max-w-[420px] flex-col items-center justify-center text-center">
-                      <Podcast className="w-10 h-10 text-slate-400" />
-                      <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-slate-50">
-                        No episodes added
-                      </h3>
-                      <p className="mt-2 mb-4 text-sm text-slate-500 dark:text-slate-400">
-                        You have not added any podcasts. Add one below.
-                      </p>
-                      <Dialog>
-                        <DialogTrigger>
-                          <Button size="sm" className="relative">
-                            <Plus className="w-4 h-4 mr-2" />
-                            Add Podcast
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Add Podcast</DialogTitle>
-                            <DialogDescription>
-                              Copy and paste the podcast feed URL to import.
-                            </DialogDescription>
-                          </DialogHeader>
-                          <div className="grid gap-4 py-4">
-                            <div className="grid gap-2">
-                              <Label htmlFor="url">Podcast URL</Label>
-                              <Input
-                                id="url"
-                                placeholder="https://example.com/feed.xml"
-                              />
-                            </div>
-                          </div>
-                          <DialogFooter>
-                            <Button>Import Podcast</Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </div>
-                </TabsContent>
-              </Tabs>
+    <div className="h-screen bg-gray-800 text-white flex">
+      {/* Discord server sidebar */}
+      <div className="w-[72px] bg-gray-900 flex flex-col items-center py-3 space-y-2">
+        {/* Discord-like server icons */}
+        <div className="w-12 h-12 bg-indigo-500 rounded-2xl flex items-center justify-center cursor-pointer hover:rounded-xl transition-all">
+          <span className="text-white font-semibold">D</span>
+        </div>
+        <div className="w-8 h-px bg-gray-600"></div>
+        <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-600 hover:rounded-xl transition-all">
+          <span className="text-gray-300 text-lg">+</span>
+        </div>
+      </div>
+
+      {/* Main content area */}
+      <div className="flex-1 flex">
+        {/* Server channels sidebar */}
+        <div className="w-60 bg-gray-700 flex flex-col">
+          <div className="h-12 border-b border-gray-800 flex items-center px-4 font-semibold">
+            Discord Clone
+          </div>
+          <div className="flex-1 p-2">
+            <div className="text-xs uppercase text-gray-400 font-semibold mb-2 px-2">
+              Text Channels
+            </div>
+            <div className="space-y-1">
+              <div className="flex items-center px-2 py-1 rounded hover:bg-gray-600 cursor-pointer">
+                <span className="text-gray-400 mr-2">#</span>
+                <span>general</span>
+              </div>
+              <div className="flex items-center px-2 py-1 rounded hover:bg-gray-600 cursor-pointer">
+                <span className="text-gray-400 mr-2">#</span>
+                <span>random</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main chat area */}
+        <div className="flex-1 flex flex-col">
+          {/* Chat header */}
+          <div className="h-12 border-b border-gray-800 flex items-center px-4">
+            <span className="text-gray-400 mr-2">#</span>
+            <span className="font-semibold">general</span>
+          </div>
+
+          {/* Chat messages */}
+          <div className="flex-1 p-4">
+            <div className="text-center text-gray-400">
+              <h2 className="text-2xl font-bold mb-2">
+                Welcome to Discord Clone!
+              </h2>
+              <p>This is the beginning of your Discord-like chat experience.</p>
+              <p className="mt-4 text-sm">
+                Sign in to create your own servers and start chatting!
+              </p>
+            </div>
+          </div>
+
+          {/* Message input */}
+          <div className="p-4">
+            <div className="bg-gray-600 rounded-lg px-4 py-3">
+              <input
+                type="text"
+                placeholder="Message #general"
+                className="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none"
+                disabled
+              />
             </div>
           </div>
         </div>
@@ -249,67 +80,41 @@ function App() {
   )
 }
 
-export default App
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const profile = await initialProfile(context)
 
-interface AlbumArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
-  album: Album
-  aspectRatio?: number
-}
+    // Check if user has any servers
+    const server = await db.server.findFirst({
+      where: {
+        members: {
+          some: {
+            profileId: profile.id,
+          },
+        },
+      },
+    })
 
-function AlbumArtwork({
-  album,
-  aspectRatio = 2.8 / 4,
-  className,
-  ...props
-}: AlbumArtworkProps) {
-  return (
-    <div className={cn("space-y-3", className)} {...props}>
-      <ContextMenu>
-        <ContextMenuTrigger>
-          <AspectRatio
-            ratio={aspectRatio}
-            className="overflow-hidden rounded-md"
-          >
-            <Image
-              src={album.cover}
-              alt={album.name}
-              fill
-              className="object-cover transition-all hover:scale-105"
-            />
-          </AspectRatio>
-        </ContextMenuTrigger>
-        <ContextMenuContent className="w-40">
-          <ContextMenuItem>Add to Library</ContextMenuItem>
-          <ContextMenuSub>
-            <ContextMenuSubTrigger>Add to Playlist</ContextMenuSubTrigger>
-            <ContextMenuSubContent className="w-48">
-              <ContextMenuItem>
-                <PlusCircle className="w-4 h-4 mr-2" />
-                New Playlist
-              </ContextMenuItem>
-              <ContextMenuSeparator />
-              {playlists.map((playlist) => (
-                <ContextMenuItem key={playlist}>
-                  <ListMusic className="w-4 h-4 mr-2" /> {playlist}
-                </ContextMenuItem>
-              ))}
-            </ContextMenuSubContent>
-          </ContextMenuSub>
-          <ContextMenuSeparator />
-          <ContextMenuItem>Play Next</ContextMenuItem>
-          <ContextMenuItem>Play Later</ContextMenuItem>
-          <ContextMenuItem>Create Station</ContextMenuItem>
-          <ContextMenuSeparator />
-          <ContextMenuItem>Like</ContextMenuItem>
-          <ContextMenuItem>Share</ContextMenuItem>
-        </ContextMenuContent>
-      </ContextMenu>
-      <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{album.name}</h3>
-        <p className="text-xs text-slate-500 dark:text-slate-400">
-          {album.artist}
-        </p>
-      </div>
-    </div>
-  )
+    if (server) {
+      return {
+        redirect: {
+          destination: `/servers/${server.id}`,
+          permanent: false,
+        },
+      }
+    }
+
+    // If user has no servers, go to setup
+    return {
+      redirect: {
+        destination: "/setup",
+        permanent: false,
+      },
+    }
+  } catch (error) {
+    // If not authenticated, show the Discord clone preview
+    return {
+      props: {},
+    }
+  }
 }
