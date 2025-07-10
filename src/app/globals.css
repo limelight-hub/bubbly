@@ -9,6 +9,6 @@
 
 @layer base {
   body {
-    @apply overflow-hidden rounded-md font-sans antialiased text-slate-900 dark:text-slate-50;
+    @apply overflow-hidden font-sans antialiased rounded-md text-slate-900 dark:text-slate-50;
   }
 }
