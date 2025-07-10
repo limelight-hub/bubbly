@@ -1,50 +1,28 @@
-import { GetServerSideProps } from "next"
+"use client";
 
-import { db } from "@/lib/db"
-import { initialProfile } from "@/lib/initial-profile"
-import InitialModal from "@/components/modals/initial-modal"
+import React from "react";
+import { redirect } from "next/navigation";
 
-interface SetupPageProps {}
+import { initialProfile } from "@/lib/initial-profile";
+import { db } from "@/lib/db";
+import InitialModal from "@/components/modals/initial-modal";
 
-export default function SetupPage(props: SetupPageProps) {
-  return <InitialModal />
+export default async function SetupPage() {
+  const profile = await initialProfile();
+
+  const server = await db.server.findFirst({
+    where: {
+      members: {
+        some: {
+          profileId: profile.id
+        }
+      }
+    }
+  });
+
+if (server) {
+  redirect(`/servers/${server.id}`);
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const profile = await initialProfile(context)
-
-    const server = await db.server.findFirst({
-      where: {
-        members: {
-          some: {
-            profileId: profile.id,
-          },
-        },
-      },
-    })
-
-    if (server) {
-      return {
-        redirect: {
-          destination: `/servers/${server.id}`,
-          permanent: false,
-        },
-      }
-    }
-
-    return {
-      props: {}, // you could pass data here if needed
-    }
-  } catch (error) {
-    if (error instanceof Error && error.message === "UNAUTHORIZED") {
-      return {
-        redirect: {
-          destination: "/sign-in",
-          permanent: false,
-        },
-      }
-    }
-    throw error
-  }
+  return <InitialModal />;
 }
