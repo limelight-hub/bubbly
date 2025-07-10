@@ -32,7 +32,12 @@ npm run tauri build
 
 ```bash
 npx prisma studio
-npx prisma f
+
+rm -rf prisma/migrations
+npx prisma migrate reset
+npx prisma migrate dev --name init
+npx prisma generate
+npx prisma db push
 
 ```
 

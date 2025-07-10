@@ -38,7 +38,7 @@ export default function RootLayout({
              */
             routerConfig={extractRouterConfig(ourFileRouter)}
           />
-          <header className="flex items-center justify-end h-16 gap-4 p-4">
+          <header className="flex justify-end items-center p-4 gap-4 h-16">
             <SignedOut>
               <SignInButton />
               <SignUpButton>
