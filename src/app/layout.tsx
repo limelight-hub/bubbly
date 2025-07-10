@@ -22,7 +22,7 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: "Bubbly Chat",
-  description: "A modern chat application built with Tauri, Next.js, and Clerk.",
+  description: "A modern chat application built with Tauri, Next.js, and Clerk."
 }
 
 export default function RootLayout({
@@ -38,7 +38,7 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={`${openSans.variable} antialiased`}>
-          <div className="flex flex-col h-screen">
+          <div className="pt-10 pl-[72px]">
             <Titlebar />
             <div className="flex flex-1 overflow-hidden">
               {/* Add your sidebar here */}
