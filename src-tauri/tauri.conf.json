@@ -1,7 +1,7 @@
 {
   "build": {
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
     "devPath": "http://localhost:1420",
     "distDir": "../dist",
     "withGlobalTauri": false
@@ -65,8 +65,8 @@
         "center": true,
         "resizable": true,
         "decorations": false,
-        "height": 920,
-        "width": 1300
+        "height": 850,
+        "width": 1200
       }
     ]
   }

@@ -25,10 +25,30 @@ yarn
 ``` bash
 pnpm install 
 pnpm add @clerk/nextjs --shamefully-hoist 
+pnpm run dev
 npm run tauri dev
 npm run tauri build
 ```
 
+
+### Git Flow
+
+``` bash
+git commit --amend --no-edit
+
+```
+
+### Prisma
+
+## Set up 
+
+```bash
+npx prisma init
+npx prisma generate
+npx prisma db push
+```
+
+## Reset 
 
 ```bash
 npx prisma studio
@@ -38,7 +58,6 @@ npx prisma migrate reset
 npx prisma migrate dev --name init
 npx prisma generate
 npx prisma db push
-
 ```
 
 
