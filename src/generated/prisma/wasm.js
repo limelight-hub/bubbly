@@ -135,16 +135,16 @@ exports.Prisma.ServerScalarFieldEnum = {
   name: 'name',
   imageUrl: 'imageUrl',
   inviteCode: 'inviteCode',
+  profileId: 'profileId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  profileId: 'profileId'
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ServerMemberScalarFieldEnum = {
+exports.Prisma.MemberScalarFieldEnum = {
   id: 'id',
   role: 'role',
-  serverId: 'serverId',
   profileId: 'profileId',
+  serverId: 'serverId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -159,6 +159,34 @@ exports.Prisma.ChannelScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  fileUrl: 'fileUrl',
+  memberId: 'memberId',
+  channelId: 'channelId',
+  deleted: 'deleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  memberOneId: 'memberOneId',
+  memberTwoId: 'memberTwoId'
+};
+
+exports.Prisma.DirectMessageScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  fileUrl: 'fileUrl',
+  memberId: 'memberId',
+  conversationId: 'conversationId',
+  deleted: 'deleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -168,7 +196,12 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-exports.ServerRole = exports.$Enums.ServerRole = {
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.MemberRole = exports.$Enums.MemberRole = {
   ADMIN: 'ADMIN',
   MODERATOR: 'MODERATOR',
   GUEST: 'GUEST'
@@ -176,15 +209,18 @@ exports.ServerRole = exports.$Enums.ServerRole = {
 
 exports.ChannelType = exports.$Enums.ChannelType = {
   TEXT: 'TEXT',
-  VOICE: 'VOICE',
-  AUDIO: 'AUDIO'
+  AUDIO: 'AUDIO',
+  VIDEO: 'VIDEO'
 };
 
 exports.Prisma.ModelName = {
   Profile: 'Profile',
   Server: 'Server',
-  ServerMember: 'ServerMember',
-  Channel: 'Channel'
+  Member: 'Member',
+  Channel: 'Channel',
+  Message: 'Message',
+  Conversation: 'Conversation',
+  DirectMessage: 'DirectMessage'
 };
 
 /**
