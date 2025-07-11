@@ -10,13 +10,6 @@ import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { MediaRoom } from "@/components/media-room";
 
-interface ChannelIdPageProps {
-  params: {
-    serverId: string;
-    channelId: string;
-  };
-}
-
 export default async function ChannelIdPage({
   params: { channelId, serverId }
 }: ChannelIdPageProps) {
