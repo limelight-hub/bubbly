@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { MemberRole } from "@prisma/client";
+import { MemberRole } from "@/generated/prisma";
 
-import { currentProfile } from "@/lib/current-profile";
+import { currentUserProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
-    const profile = await currentProfile();
+    const profile = await currentUserProfile();
     const { name, type } = await req.json();
     const { searchParams } = new URL(req.url);
 

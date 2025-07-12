@@ -1,35 +1,35 @@
 import { NextResponse } from "next/server";
-import { DirectMessage } from "@prisma/client";
+import { Message } from "@/generated/prisma";
 
-import { currentProfile } from "@/lib/current-profile";
+import { currentUserProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
 const MESSAGES_BATCH = 10;
 
 export async function GET(req: Request) {
   try {
-    const profile = await currentProfile();
+    const profile = await currentUserProfile();
     const { searchParams } = new URL(req.url);
 
     const cursor = searchParams.get("cursor");
-    const conversationId = searchParams.get("conversationId");
+    const channelId = searchParams.get("channelId");
 
     if (!profile) return new NextResponse("Unauthorized", { status: 401 });
 
-    if (!conversationId)
-      return new NextResponse("Conversation ID Missing", { status: 400 });
+    if (!channelId)
+      return new NextResponse("Channel ID Missing", { status: 400 });
 
-    let messages: DirectMessage[] = [];
+    let messages: Message[] = [];
 
     if (cursor) {
-      messages = await db.directMessage.findMany({
+      messages = await db.message.findMany({
         take: MESSAGES_BATCH,
         skip: 1,
         cursor: {
           id: cursor
         },
         where: {
-          conversationId
+          channelId
         },
         include: {
           member: {
@@ -41,9 +41,9 @@ export async function GET(req: Request) {
         orderBy: { createdAt: "desc" }
       });
     } else {
-      messages = await db.directMessage.findMany({
+      messages = await db.message.findMany({
         take: MESSAGES_BATCH,
-        where: { conversationId },
+        where: { channelId },
         include: {
           member: {
             include: {
@@ -63,7 +63,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ items: messages, nextCursor });
   } catch (error) {
-    console.error("[DIRECT_MESSAGES_GET]", error);
+    console.error("[MESSAGES_GET]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

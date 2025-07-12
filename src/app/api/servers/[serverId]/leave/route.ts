@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { currentProfile } from "@/lib/current-profile";
+import { currentUserProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
 export async function PATCH(
@@ -8,7 +8,7 @@ export async function PATCH(
   { params }: { params: { serverId: string } }
 ) {
   try {
-    const profile = await currentProfile();
+    const profile = await currentUserProfile();
 
     if (!profile) return new NextResponse("Unauthorized", { status: 401 });
 
