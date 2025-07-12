@@ -1,9 +1,9 @@
 import React from "react";
 import { redirect } from "next/navigation";
-import { ChannelType, MemberRole } from "@/generated/prisma";
+import { ChannelType, MemberRole } from "@prisma/client";
 import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 
-import { currentUserProfile } from "@/lib/current-profile";
+import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
 import { ServerHeader } from "@/components/server/server-header";
@@ -15,21 +15,21 @@ import { ServerChannel } from "@/components/server/server-channel";
 import { ServerMember } from "@/components/server/server-member";
 
 const iconMap = {
-  [ChannelType.TEXT]: <Hash className="w-4 h-4 mr-2" />,
-  [ChannelType.AUDIO]: <Mic className="w-4 h-4 mr-2" />,
-  [ChannelType.VIDEO]: <Video className="w-4 h-4 mr-2" />
+  [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
+  [ChannelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />,
+  [ChannelType.VIDEO]: <Video className="mr-2 h-4 w-4" />
 };
 
 const roleIconMap = {
   [MemberRole.GUEST]: null,
   [MemberRole.MODERATOR]: (
-    <ShieldCheck className="w-4 h-4 mr-2 text-indigo-500" />
+    <ShieldCheck className="h-4 w-4 mr-2 text-indigo-500" />
   ),
-  [MemberRole.ADMIN]: <ShieldAlert className="w-4 h-4 mr-2 text-rose-500" />
+  [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 mr-2 text-rose-500" />
 };
 
 export async function ServerSidebar({ serverId }: { serverId: string }) {
-  const profile = await currentUserProfile();
+  const profile = await currentProfile();
 
   if (!profile) return redirect("/");
 
@@ -120,7 +120,7 @@ export async function ServerSidebar({ serverId }: { serverId: string }) {
             ]}
           />
         </div>
-        <Separator className="my-2 rounded-md bg-zinc-200 dark:bg-zinc-700" />
+        <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
         {!!textChannels?.length && (
           <div className="mb-2">
             <ServerSection
