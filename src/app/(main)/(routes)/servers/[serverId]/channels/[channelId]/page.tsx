@@ -1,21 +1,28 @@
 import React from "react";
 import { RedirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { ChannelType } from "@prisma/client";
+import { ChannelType } from "@/generated/prisma";
 
 import { currentUserProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { ChatHeader } from "@/components/chat/chat-header";
-import { ChatInput } from "@/components/chat/chat-input";
-import { ChatMessages } from "@/components/chat/chat-messages";
+// import { ChatHeader } from "@/components/chat/chat-header";
+// import { ChatInput } from "@/components/chat/chat-input";
+// import { ChatMessages } from "@/components/chat/chat-messages";
 import { MediaRoom } from "@/components/media-room";
+
+interface ChannelIdPageProps {
+  params: {
+    serverId: string;
+    channelId: string;
+  };
+}
 
 export default async function ChannelIdPage({
   params: { channelId, serverId }
 }: ChannelIdPageProps) {
   const profile = await currentUserProfile();
 
-  if (!profile) return <RedirectToSignIn />;
+  if (!profile) return RedirectToSignIn;
 
   const channel = await db.channel.findUnique({
     where: { id: channelId }

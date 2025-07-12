@@ -9,7 +9,7 @@ export default async function MainLayout({
 }) {
   return (
     <div className="h-full">
-      <div className="fixed top-10 left-0 z-30 flex flex-col h-[calc(100vh-40px)] w-[72px] bg-[#e3e5e8] dark:bg-[#1e1f22] space-y-4 items-center text-primary">
+      <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
         <NavigationSidebar />
       </div>
       <main className="md:pl-[72px] h-full">{children}</main>
