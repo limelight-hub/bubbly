@@ -60,6 +60,7 @@ export function FileUpload({ onChange, value, endpoint }: FileUploadProps) {
       endpoint={endpoint}
       onClientUploadComplete={(res) => {
         onChange(res?.[0].ufsUrl);
+        console.log("Files: ", res);
       }}
       onUploadError={(error: Error) => console.error(error.message)}
     />

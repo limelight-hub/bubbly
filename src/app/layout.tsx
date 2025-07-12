@@ -12,7 +12,7 @@ import {
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
 import { extractRouterConfig } from "uploadthing/server"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ClientThemeProvider } from "@/components/providers/theme-provider"
 import "./globals.css"
 import { Titlebar } from "@/components/titlebar"
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ThemeProvider
+    <ClientThemeProvider
       attribute="class"
       defaultTheme="system"
       enableSystem
@@ -63,6 +63,6 @@ export default function RootLayout({
           </body>
         </html>
       </ClerkProvider>
-    </ThemeProvider>
+    </ClientThemeProvider>
   )
 }

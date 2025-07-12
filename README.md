@@ -59,6 +59,9 @@ npx prisma migrate reset
 npx prisma migrate dev --name init
 npx prisma generate
 npx prisma db push
+
+
+rm -rf .next
 ```
 
 
