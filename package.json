@@ -4,10 +4,11 @@
   "license": "MIT",
   "version": "0.0.0",
   "scripts": {
-    "web": "next dev -p 1420",
-    "desktop": "tauri dev",
     "dev": "next dev -p 1420",
-    "build": "next build && next export -o dist",
+    "build": "next build",
+    "format": "npx prettier --write . --ignore-path .gitignore ",
+    "taze": "taze major -I",
+    "taze:minor": "taze minor -w",
     "tauri": "tauri"
   },
   "dependencies": {

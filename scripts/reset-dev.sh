@@ -3,9 +3,11 @@
 echo "🔁 Resetting local dev environment..."
 
 rm -rf node_modules .next .turbo pnpm-lock.yaml # chưa đổi repo 
+rm -rf src/generated
 pnpm install
 pnpm prisma generate
 pnpm approve-builds
+
 
 echo "✅ Local dev environment reset successfully."
 
