@@ -32,7 +32,7 @@ export function SocketProvider({
 
   useEffect(() => {
     const socketInstance = new (ClientIO as any)(
-      process.env.NEXT_PUBLIC_SITE_URL!,
+      process.env.NEXT_PUBLIC_APP_URL!,
       {
         path: "/api/socket/io",
         addTrailingSlash: false
@@ -40,10 +40,12 @@ export function SocketProvider({
     );
 
     socketInstance.on("connect", () => {
+      console.log("✅ Socket connected");
       setIsConnected(true);
     });
 
     socketInstance.on("disconnect", () => {
+      console.log("❌ Socket disconnected");
       setIsConnected(false);
     });
 
