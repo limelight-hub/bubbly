@@ -54,6 +54,7 @@ npx prisma db push
 npx prisma studio
 
 rm -rf prisma/migrations
+rm -rf src/generated
 npx prisma migrate reset
 npx prisma migrate dev --name init
 npx prisma generate
