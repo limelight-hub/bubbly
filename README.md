@@ -1,85 +1,51 @@
-![tauri-ui-boilerplate](https://user-images.githubusercontent.com/16024979/216376616-123be614-b6f0-465d-a18e-aee43bc5d005.png)
+# NT106.P21.ANTT - LẬP TRÌNH MẠNG CĂN BẢN
+***Lời ngỏ:***
+***Chào mừng quý thầy cô và các bạn đến với ứng dụng Bubbly Chatcủa nhóm 3! Đây là sản phẩm mà cả nhóm đã cùng nhau lên ý tưởng, xây dựng và hoàn thiện với tất cả sự tâm huyết. Chúng mình hy vọng rằng ứng dụng này sẽ mang lại những trải nghiệm hữu ích và thú vị cho mọi người. Dù đã cố gắng hết sức, nhưng chắc chắn không thể tránh khỏi những thiếu sót. Nhóm rất mong nhận được những góp ý chân thành từ quý thầy cô và các bạn để có thể cải thiện và phát triển sản phẩm ngày càng tốt hơn. Sự ủng hộ và đóng góp của mọi người chính là động lực lớn nhất để nhóm tiếp tục học hỏi và hoàn thiện hơn trong những dự án tiếp theo. Nhóm 3 xin chân thành cảm ơn! ❤️***
 
-# Tauri + Next.js 13 + shadcn/ui
+# I. ĐỒ ÁN MÔN HỌC
+**Tên đồ án: Bubbly Chat** Đây là một úng dụng chat thông thường được nhóm mình làm lại với các chức năng đơn giản.
 
-[Tauri](https://github.com/tauri-apps/tauri) boilerplate with [Next.js 13](https://beta.nextjs.org/docs) and [shadcn/ui](https://github.com/shadcn/ui).
-
-- Tauri
-- Next.js 13
-- shadcn/ui
-- Radix UI
-- TypeScript
-- Tailwind
-- Lucide Icons
-- [Bundle size optimized](https://github.com/johnthagen/min-sized-rust) [`Cargo.toml`](/src-tauri/Cargo.toml) (.msi 2mb)
-
-## Getting Started
-### WE USE PNPM FOR ADD THINGS
+# II. HƯỚNG DẪN CÀI ĐẶT 
+## Set up
+### Mở Terminal hoặc Powershell copy đoạn mã và paste 
 
 ```
-gh repo clone agmmnn/tauri-ui-boilerplate
-cd tauri-ui-boilerplate
-yarn
+git clone https://github.com/limelight-hub/discord-desktop.git
 ```
+# III. SƠ ĐỒ PHÂN RÃ
+![alt text](image.png)
 
-``` bash
-pnpm install 
-pnpm add @clerk/nextjs --shamefully-hoist 
-pnpm run dev
-npm run tauri dev
-npm run tauri build
-```
+# IV. CƠ SỞ LÝ THUYÊTSS
+## Công nghệ sử dụng
 
-
-### Git Flow
-
-``` bash
-git commit --amend --no-edit
-
-```
-
-### Prisma
-
-## Set up 
-
-```bash
-npx prisma init
-npx prisma generate
-npx prisma db push
-```
-
-## Reset 
-
-```bash
-npx prisma studio
-
-rm -rf prisma/migrations
-npx prisma migrate reset
-npx prisma migrate dev --name init
-npx prisma generate
-npx prisma db push
-```
+-
+-
+-
+-
 
 
-## To-Do
+## Api sử dụng
 
-- [x] Titlebar draggable.
-- [x] Titlebar minimize, maximize, close buttons.
-- [x] Titlebar double-click maximize.
-- [x] Decomposing UI into components.
-- [x] Dark-Light mode switch.
-- [x] Get simple data from the Rust backend code.
+-
+-
+-
+-
 
-## Customization
 
-- [package.json](/package.json)
-- [src-tauri/tauri.conf.json](src-tauri/tauri.conf.json)
-- Update `app-icon.png`, run `yarn tauri icon`. This will automatically generate icon files into src-tauri/icons.
 
-## Update Components
+# V. CÁC TÍNH NĂNG
+## Các tình năng nhó đã hoàn thiện:
+- Tạo channel nhắn tin
+- Private messages
+- upload file và pdf
+## Các tính năng chưa và sẽ hoàn thiện sắp tới:
+- Phone Call and Video Call
 
-shadcn/ui [is not a library](https://ui.shadcn.com/docs#faqs). So you need to update components by hand. You can [download](https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Fshadcn%2Fui%2Ftree%2Fmain%2Fapps%2Fwww%2Fcomponents%2Fui) the [shadcn/ui/apps/www/components/ui](https://github.com/shadcn/ui/tree/main/apps/www/components/ui) directory and paste it into [src/components/ui](/src/components/ui).
 
+# VI.sINH VIÊN THỰC HIỆN
+Trần Đồng Trúc Lam − 22520746  
+Nguyễn Anh Tuấn − 23521717   
+Ngô Thái Vinh − 23521791
 ## Folder Structure
 
 ```
@@ -111,4 +77,4 @@ shadcn/ui [is not a library](https://ui.shadcn.com/docs#faqs). So you need to up
 
 ## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- 
