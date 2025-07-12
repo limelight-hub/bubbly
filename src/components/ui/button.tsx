@@ -19,12 +19,14 @@ const buttonVariants = cva(
         ghost:
           "bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 dark:text-slate-100 dark:hover:text-slate-100 data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent",
         link: "bg-transparent underline-offset-4 hover:underline text-slate-900 dark:text-slate-100 hover:bg-transparent dark:hover:bg-transparent",
-        primary: "bg-[#5865f2] text-white hover:bg-purple-600 dark:bg-purple-50 dark:text-purple-900",
+        primary:
+          "bg-[#5865f2] text-white hover:bg-purple-600 dark:bg-purple-50 dark:text-purple-900",
       },
       size: {
         default: "h-10 py-2 px-4",
         sm: "h-9 px-2 rounded-md",
         lg: "h-11 px-8 rounded-md",
+        icon: "h-10 w-10 rounded-full",
       },
     },
     defaultVariants: {

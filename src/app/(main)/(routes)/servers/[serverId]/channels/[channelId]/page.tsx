@@ -10,12 +10,19 @@ import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { MediaRoom } from "@/components/media-room";
 
+interface ChannelIdPageProps {
+  params: {
+    serverId: string;
+    channelId: string;
+  };
+}
+
 export default async function ChannelIdPage({
   params: { channelId, serverId }
 }: ChannelIdPageProps) {
   const profile = await currentUserProfile();
 
-  if (!profile) return <RedirectToSignIn />;
+  if (!profile) return <RedirectToSignIn/>;
 
   const channel = await db.channel.findUnique({
     where: { id: channelId }
