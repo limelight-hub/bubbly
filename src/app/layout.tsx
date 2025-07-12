@@ -16,6 +16,10 @@ import { ClientThemeProvider } from "@/components/providers/theme-provider"
 import "./globals.css"
 import { Titlebar } from "@/components/titlebar"
 
+import { ModalProvider } from "@/components/providers/modal-provider";
+import { SocketProvider } from "@/components/providers/socket-provider";
+import { QueryProvider } from "@/components/providers/query-provider";
+
 const openSans = Open_Sans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -33,24 +37,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClientThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <ClerkProvider
-        appearance={{
-          cssLayerName: "clerk",
-        }}
-      >
-        <html lang="en">
-          <body className={`${openSans.variable} antialiased`}>
+    <html lang="en">
+      <body className={`${openSans.variable} antialiased`}>
+        <ClerkProvider
+          appearance={{
+            cssLayerName: "clerk",
+          }}
+        >
+          <ClientThemeProvider          >
+            <SocketProvider>
+              <ModalProvider />
+              <QueryProvider>
             <div className="h-screen overflow-clip">
               <Titlebar />
               <div className="flex flex-1 overflow-hidden">
-                {/* Add your sidebar here */}
-
                 <div className="flex-1 overflow-auto">
                   <NextSSRPlugin
                     routerConfig={extractRouterConfig(ourFileRouter)}
@@ -60,9 +60,11 @@ export default function RootLayout({
                 </div>
               </div>
             </div>
-          </body>
-        </html>
-      </ClerkProvider>
-    </ClientThemeProvider>
+            </QueryProvider>
+            </SocketProvider>
+          </ClientThemeProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   )
 }

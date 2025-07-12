@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
-import { MemberRole } from "@/generated/prisma"
+import { MemberRole } from "@prisma/client"
 import { useModal } from "@/hooks/use-modal-store"
 import { ServerWithMembersWithProfiles } from "@/types"
 import axios from "axios"

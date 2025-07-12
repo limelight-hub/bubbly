@@ -1,21 +1,20 @@
-// hack for hot reloading not to create multiple instances of prisma client
-
-import { PrismaClient } from "@/generated/prisma";
+// lib/db.ts
+import { PrismaClient } from "@prisma/client";
 
 declare global {
   var prisma: PrismaClient | undefined;
 }
 
-const createPrismaClient = () => {
-  return new PrismaClient({
-    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-  });
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
 };
 
-export const db = globalThis.prisma ?? createPrismaClient();
+export const db =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: ["query", "error", "warn"],
+  });
 
 if (process.env.NODE_ENV !== "production") {
-  globalThis.prisma = db;
+  globalForPrisma.prisma = db;
 }
-
-

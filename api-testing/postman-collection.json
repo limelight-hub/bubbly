@@ -1,0 +1,454 @@
+{
+  "info": {
+    "name": "Bubbly Chat API - Discord Clone",
+    "description": "Complete API collection for testing the Discord clone application endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:1420",
+      "type": "string"
+    },
+    {
+      "key": "server_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "channel_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "member_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "conversation_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Server Management",
+      "description": "API endpoints for managing Discord-like servers",
+      "item": [
+        {
+          "name": "Create Server",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Test Server\",\n  \"imageUrl\": \"https://via.placeholder.com/150\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/servers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "servers"]
+            },
+            "description": "Creates a new server with the authenticated user as admin"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"My Test Server\",\n  \"imageUrl\": \"https://via.placeholder.com/150\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/servers",
+                  "host": ["{{base_url}}"],
+                  "path": ["api", "servers"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": \"server-uuid\",\n  \"name\": \"My Test Server\",\n  \"imageUrl\": \"https://via.placeholder.com/150\",\n  \"inviteCode\": \"unique-invite-code\",\n  \"profileId\": \"profile-uuid\",\n  \"createdAt\": \"2024-01-15T10:30:00Z\",\n  \"updatedAt\": \"2024-01-15T10:30:00Z\",\n  \"channels\": [\n    {\n      \"id\": \"channel-uuid\",\n      \"name\": \"general\",\n      \"type\": \"TEXT\",\n      \"profileId\": \"profile-uuid\",\n      \"serverId\": \"server-uuid\"\n    }\n  ],\n  \"members\": [\n    {\n      \"id\": \"member-uuid\",\n      \"role\": \"ADMIN\",\n      \"profileId\": \"profile-uuid\",\n      \"serverId\": \"server-uuid\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Server",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Server Name\",\n  \"imageUrl\": \"https://via.placeholder.com/200\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/servers/{{server_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "servers", "{{server_id}}"]
+            },
+            "description": "Updates server details. Only server owner can update."
+          }
+        },
+        {
+          "name": "Delete Server",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/servers/{{server_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "servers", "{{server_id}}"]
+            },
+            "description": "Deletes a server. Only server owner can delete."
+          }
+        },
+        {
+          "name": "Regenerate Invite Code",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/servers/{{server_id}}/invite-code",
+              "host": ["{{base_url}}"],
+              "path": ["api", "servers", "{{server_id}}", "invite-code"]
+            },
+            "description": "Generates a new invite code for the server. Only server owner can regenerate."
+          }
+        },
+        {
+          "name": "Leave Server",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/servers/{{server_id}}/leave",
+              "host": ["{{base_url}}"],
+              "path": ["api", "servers", "{{server_id}}", "leave"]
+            },
+            "description": "Allows a user to leave a server. Server owner cannot leave their own server."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Channel Management",
+      "description": "API endpoints for managing channels within servers",
+      "item": [
+        {
+          "name": "Update Channel",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"updated-channel-name\",\n  \"type\": \"TEXT\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/channels/{{channel_id}}?serverId={{server_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "channels", "{{channel_id}}"],
+              "query": [
+                {
+                  "key": "serverId",
+                  "value": "{{server_id}}"
+                }
+              ]
+            },
+            "description": "Updates channel details. Only admins and moderators can update channels."
+          }
+        },
+        {
+          "name": "Delete Channel",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/channels/{{channel_id}}?serverId={{server_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "channels", "{{channel_id}}"],
+              "query": [
+                {
+                  "key": "serverId",
+                  "value": "{{server_id}}"
+                }
+              ]
+            },
+            "description": "Deletes a channel. Only admins and moderators can delete channels. Cannot delete 'general' channel."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Member Management",
+      "description": "API endpoints for managing server members",
+      "item": [
+        {
+          "name": "Update Member Role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"MODERATOR\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/members/{{member_id}}?serverId={{server_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "members", "{{member_id}}"],
+              "query": [
+                {
+                  "key": "serverId",
+                  "value": "{{server_id}}"
+                }
+              ]
+            },
+            "description": "Updates a member's role in the server. Only server owner can update member roles."
+          }
+        },
+        {
+          "name": "Remove Member",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/members/{{member_id}}?serverId={{server_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "members", "{{member_id}}"],
+              "query": [
+                {
+                  "key": "serverId",
+                  "value": "{{server_id}}"
+                }
+              ]
+            },
+            "description": "Removes a member from the server. Only server owner can remove members."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Message Management",
+      "description": "API endpoints for retrieving messages",
+      "item": [
+        {
+          "name": "Get Channel Messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/messages?channelId={{channel_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "messages"],
+              "query": [
+                {
+                  "key": "channelId",
+                  "value": "{{channel_id}}"
+                },
+                {
+                  "key": "cursor",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Retrieves paginated messages from a channel."
+          }
+        },
+        {
+          "name": "Get Channel Messages (Paginated)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/messages?channelId={{channel_id}}&cursor=your-cursor-here",
+              "host": ["{{base_url}}"],
+              "path": ["api", "messages"],
+              "query": [
+                {
+                  "key": "channelId",
+                  "value": "{{channel_id}}"
+                },
+                {
+                  "key": "cursor",
+                  "value": "your-cursor-here"
+                }
+              ]
+            },
+            "description": "Retrieves paginated messages from a channel with cursor for pagination."
+          }
+        },
+        {
+          "name": "Get Direct Messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/direct-messages?conversationId={{conversation_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "direct-messages"],
+              "query": [
+                {
+                  "key": "conversationId",
+                  "value": "{{conversation_id}}"
+                },
+                {
+                  "key": "cursor",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Retrieves paginated direct messages from a conversation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "File Upload",
+      "description": "API endpoints for file uploads",
+      "item": [
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": [],
+                  "description": "File to upload (image or PDF)"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/uploadthing",
+              "host": ["{{base_url}}"],
+              "path": ["api", "uploadthing"]
+            },
+            "description": "Handles file uploads for server images and message attachments."
+          }
+        }
+      ]
+    },
+    {
+      "name": "LiveKit Integration",
+      "description": "API endpoints for video/audio calling (optional)",
+      "item": [
+        {
+          "name": "Get Access Token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/livekit?room=test-room&username=test-user",
+              "host": ["{{base_url}}"],
+              "path": ["api", "livekit"],
+              "query": [
+                {
+                  "key": "room",
+                  "value": "test-room"
+                },
+                {
+                  "key": "username",
+                  "value": "test-user"
+                }
+              ]
+            },
+            "description": "Generates LiveKit access token for video/audio calls. Note: This endpoint is currently commented out in the codebase."
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Pre-request script to set up authentication",
+          "// Make sure you have set the auth_token environment variable",
+          "if (!pm.environment.get('auth_token')) {",
+          "  console.warn('Warning: auth_token not set in environment variables');",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test script",
+          "pm.test('Response status code is not 500', function () {",
+          "  pm.expect(pm.response.code).to.not.equal(500);",
+          "});",
+          "",
+          "pm.test('Response time is less than 5000ms', function () {",
+          "  pm.expect(pm.response.responseTime).to.be.below(5000);",
+          "});",
+          "",
+          "// Extract IDs from successful responses for use in subsequent requests",
+          "if (pm.response.code === 200 || pm.response.code === 201) {",
+          "  const responseJson = pm.response.json();",
+          "  ",
+          "  if (responseJson.id) {",
+          "    // If response has an ID, check if it's a server creation response",
+          "    if (responseJson.channels && responseJson.members) {",
+          "      pm.environment.set('server_id', responseJson.id);",
+          "      if (responseJson.channels.length > 0) {",
+          "        pm.environment.set('channel_id', responseJson.channels[0].id);",
+          "      }",
+          "      if (responseJson.members.length > 0) {",
+          "        pm.environment.set('member_id', responseJson.members[0].id);",
+          "      }",
+          "      console.log('Updated server_id:', responseJson.id);",
+          "    }",
+          "  }",
+          "}"
+        ]
+      }
+    }
+  ]
+}

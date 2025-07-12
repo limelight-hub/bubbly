@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Member, MemberRole, Profile } from "@/generated/prisma";
+import { Member, MemberRole, Profile } from "@prisma/client";
 import {
   Edit,
   FileIcon,

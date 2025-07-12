@@ -1,7 +1,7 @@
 import React from "react";
 import { RedirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { ChannelType } from "@/generated/prisma";
+import { ChannelType } from "@prisma/client";
 
 import { currentUserProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";

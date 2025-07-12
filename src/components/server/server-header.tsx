@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MemberRole } from "@/generated/prisma";
+import { MemberRole } from "@prisma/client";
 import {
   ChevronDown,
   LogOutIcon,
