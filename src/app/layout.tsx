@@ -37,10 +37,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-      <ClerkProvider appearance={{ cssLayerName: "clerk" }}>
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${openSans.variable} antialiased`}>
-      
+    <ClerkProvider appearance={{ cssLayerName: "clerk" }}>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${openSans.variable} antialiased`}>
           <ClientThemeProvider>
             <QueryProvider>
               <SocketProvider>
@@ -60,9 +59,8 @@ export default function RootLayout({
               </SocketProvider>
             </QueryProvider>
           </ClientThemeProvider>
-      
-      </body>
-    </html>
-      </ClerkProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
