@@ -10,6 +10,7 @@
   import { ScrollArea } from "@/components/ui/scroll-area";
   import { NavigationItem } from "@/components/navigation/navigation-item";
   import { ThemeToggle } from "@/components/theme-toggle";
+  import SignOutButtonCustom from "@/components/sign-out";
 
   export async function NavigationSidebar() {
     const profile = await currentUserProfile();
@@ -51,6 +52,7 @@
               }
             }}
           />
+          <SignOutButtonCustom/>
         </div>
       </div>
     );
