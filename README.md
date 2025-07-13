@@ -2,7 +2,9 @@
 
 A modern, feature-rich Discord clone built with Next.js 15, Tauri, and modern web technologies. Experience real-time messaging, server management, and voice/video capabilities in a sleek desktop application.
 
-<img src="./app-icon.png" alt="Bubbly Chat Logo" width="128" height="128">
+<div align="center">
+  <img src="./app-icon.png" alt="Bubbly Chat Logo" width="128" height="128" >
+</div>
 
 ## ✨ Features
 
