@@ -1,4 +1,4 @@
-# <img src="./app-icon.png" alt="Bubbly Chat" width="32" height="32" style="vertical-align: middle;">
+# Bubby Chat <img src="./app-icon.png" alt="Bubbly Chat" width="32" height="32" style="vertical-align: middle;">
 
 A modern, feature-rich Discord clone built with Next.js 15, Tauri, and modern web technologies. Experience real-time messaging, server management, and voice/video capabilities in a sleek desktop application.
 
