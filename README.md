@@ -13,7 +13,7 @@
 git clone https://github.com/limelight-hub/discord-desktop.git
 ```
 # III. SƠ ĐỒ PHÂN RÃ
-![alt text](image.png)
+![alt text](image-1.png)
 
 # IV. CƠ SỞ LÝ THUYÊTSS
 ## Công nghệ sử dụng
