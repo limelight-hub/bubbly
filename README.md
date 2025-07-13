@@ -1,9 +1,14 @@
-# 🎮 Bubbly Chat - Discord Clone
+# <img src="./app-icon.png" alt="Bubbly Chat" width="32" height="32" style="vertical-align: middle;">
 
 A modern, feature-rich Discord clone built with Next.js 15, Tauri, and modern web technologies. Experience real-time messaging, server management, and voice/video capabilities in a sleek desktop application.
 
-<div align="center">
-  <img src="./app-icon.png" alt="Bubbly Chat Logo" width="128" height="128" >
+<div align="center"
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tauri](https://img.shields.io/badge/Tauri-2.0-orange?style=for-the-badge&logo=tauri)](https://tauri.app/)
+[![Prisma](https://img.shields.io/badge/Prisma-5.0-2D3748?style=for-the-badge&logo=prisma)](https://www.prisma.io/)
+
 </div>
 
 ## ✨ Features
