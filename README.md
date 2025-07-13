@@ -87,8 +87,6 @@ A modern, feature-rich Discord clone built with Next.js 15, Tauri, and modern we
    CLERK_SECRET_KEY="your-clerk-secret-key"
 
    # UploadThing
-   UPLOADTHING_SECRET="your-uploadthing-secret"
-   UPLOADTHING_APP_ID="your-uploadthing-app-id"
    UPLOADTHING_TOKEN="your-uploadthing-token"
    ```
 
