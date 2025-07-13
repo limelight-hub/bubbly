@@ -15,7 +15,7 @@ git clone https://github.com/limelight-hub/discord-desktop.git
 # III. SƠ ĐỒ PHÂN RÃ
 ![alt text](image-1.png)
 
-# IV. CƠ SỞ LÝ THUYÊTSS
+# IV. CƠ SỞ LÝ Thuyét
 ## Công nghệ sử dụng
 
 -
