@@ -17,9 +17,9 @@ interface ChannelIdPageProps {
   };
 }
 
-export default async function ChannelIdPage({
-  params: { channelId, serverId }
-}: ChannelIdPageProps) {
+export default async function ChannelIdPage(props: ChannelIdPageProps) {  
+  const {params} = props;
+  const { channelId, serverId } = params;
   const profile = await currentUserProfile();
 
   if (!profile) return RedirectToSignIn;

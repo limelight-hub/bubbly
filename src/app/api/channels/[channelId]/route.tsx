@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { MemberRole } from "@prisma/client";
 
-import { currentUserProfile } from "@/lib/current-profile";
+import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
 export async function PATCH(
@@ -9,7 +9,7 @@ export async function PATCH(
   { params }: { params: { channelId: string } }
 ) {
   try {
-    const profile = await currentUserProfile();
+    const profile = await currentProfile();
     if (!profile) return new NextResponse("Unauthorized", { status: 401 });
 
     const { searchParams } = new URL(req.url);
@@ -67,7 +67,7 @@ export async function DELETE(
   { params }: { params: { channelId: string } }
 ) {
   try {
-    const profile = await currentUserProfile();
+    const profile = await currentProfile();
     if (!profile) return new NextResponse("Unauthorized", { status: 401 });
 
     const { searchParams } = new URL(req.url);
